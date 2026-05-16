@@ -37,7 +37,7 @@ button{
     font-size:20px;
     border:none;
     border-radius:15px;
-    background:#0000FF;
+    background:#A020F0;
     color:white;
     cursor:pointer;
 }
@@ -67,7 +67,7 @@ button:hover{
 }
 
 .comprarTudo{
-    background:green;
+    background:grenn;
     width:100%;
     margin-top:15px;
 }
@@ -87,6 +87,13 @@ button:hover{
     cursor:pointer;
 }
 
+.exemploFoto{
+    width:100%;
+    height:250px;
+    border-radius:20px;
+    overflow:hidden;
+    cursor:zoom-in;
+}
 
 #zoomOverlay{
     display:none;
@@ -155,6 +162,7 @@ button:hover{
 
 <div class="container">
 
+
 <h1>『🛒』DC_VENDAS</h1>
 <h2>+55 62 9976-4298</h2>
 
@@ -199,6 +207,7 @@ button:hover{
 </div>
 
 
+
 <!-- FEEDBACK -->
 <div id="feedback" class="submenu" style="display:none;">
 
@@ -212,7 +221,7 @@ Isso impede feedback fake mesmo mudando o nome.
 <br>
 
 <div id="mediaEstrelas"
-style="font-size:25px;color:gold;font-weight:bol;">
+style="font-size:25px;color:gold;font-weight:bold;">
 ⭐⭐⭐⭐⭐ (5.0)
 </div>
 
@@ -220,7 +229,8 @@ style="font-size:25px;color:gold;font-weight:bol;">
 
 <!-- FOTO -->
 <div class="exemploFoto" onclick="abrirZoom('https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png')">
-    <img src="https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png">
+    <img src="https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png"
+    style="width:100%;height:100%;object-fit:cover;">
 </div>
 
 <br>
@@ -302,16 +312,27 @@ Enviar feedback
 <script>
 
 const firebaseConfig = {
+
   apiKey: "AIzaSyDiUxNnUpNOLfr42s9vhQLApuntCI5k41Q",
+
   authDomain: "dcvendas.firebaseapp.com",
+
+  databaseURL: "https://dcvendas-default-rtdb.firebaseio.com",
+
   projectId: "dcvendas",
-  storageBucket: "dcvendas.firebasestorage.app",
+
+  storageBucket: "dcvendas.firebaseapp.com",
+
   messagingSenderId: "703988302793",
+
   appId: "1:703988302793:web:11b4530ca2db8d621ade18",
+
   measurementId: "G-NQV3GSPZG5"
+
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const db = firebase.database();
 
 /* =========================
@@ -692,4 +713,4 @@ function mostrarFeedbacks(){
     });
 }
 
-</script>
+    </script>
