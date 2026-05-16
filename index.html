@@ -10,7 +10,7 @@
 body{
     margin:0;
     font-family:Arial,sans-serif;
-   background:url('https://i.ibb.co/VcxSk0HZ/file-000000001fac720eaabdb3954d001059.png') no-repeat center center fixed;
+    background:url('https://i.ibb.co/VcxSk0HZ/file-000000001fac720eaabdb3954d001059.png') no-repeat center center fixed;
     background-size:cover;
     color:white;
     text-align:center;
@@ -67,7 +67,7 @@ button:hover{
 }
 
 .comprarTudo{
-    background:grenn;
+    background:green;
     width:100%;
     margin-top:15px;
 }
@@ -114,7 +114,7 @@ button:hover{
     border-radius:15px;
 }
 
-/* 🔥 CARRINHO FLUTUANTE */
+/* CARRINHO FLUTUANTE */
 #carrinhoFlutuante{
     position:fixed;
     bottom:20px;
@@ -130,7 +130,7 @@ button:hover{
     z-index:999999;
 }
 
-/* 🔥 POPUP CARRINHO */
+/* POPUP CARRINHO */
 #carrinhoPopup{
     position:fixed;
     bottom:90px;
@@ -162,51 +162,95 @@ button:hover{
 
 <div class="container">
 
-
 <h1>『🛒』DC_VENDAS</h1>
 <h2>+55 62 9976-4298</h2>
 
 <!-- MENU -->
 <div id="main" class="menu">
-    <button onclick="abrir('golds')">💰 Golds</button>
-    <button onclick="abrir('carros raros')">🚗 CARROS RAROS</button>
-    <button onclick="abrir('carros premium')">🚗 CARROS PREMIUM</button>
-    <button onclick="abrir('carros glitch')">🚗 CARROS GLITCH</button>
-    <button onclick="abrir('feedback')">💬 feedback</button>
+
+<button onclick="abrir('golds')">💰 Golds</button>
+
+<button onclick="abrir('carros_raros')">🚗 CARROS RAROS</button>
+
+<button onclick="abrir('carros_premium')">🚗 CARROS PREMIUM</button>
+
+<button onclick="abrir('carros_glitch')">🚗 CARROS GLITCH</button>
+
+<button onclick="abrir('feedback')">💬 Feedback</button>
+
 </div>
 
 <!-- GOLDS -->
 <div id="golds" class="submenu" style="display:none;">
-<button onclick="adicionarCarrinho('qualquer quantidade de golds',6.50)">QUALQUER QUANTIA DE GOLDS= R$6,50</button>
-<button onclick="adicionarCarrinho('qualquer quantidade de golds + king ',10,00)">GOLDS+KING= R$10</button>
+
+<button onclick="adicionarCarrinho('Qualquer quantidade de golds',6.50)">
+QUALQUER QUANTIA DE GOLDS = R$6,50
+</button>
+
+<button onclick="adicionarCarrinho('Golds + King',10)">
+QUALQUER QUANTIA DE GOLDS + KING = R$10
+</button>
+
 <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
 </div>
 
-<!-- carros raros -->
-<div id="carros raros" class="submenu" style="display:none;">
-<button onclick="adicionarCarrinho('Sw4',8)">SW4= R$8,00</button>
-<button onclick="adicionarCarrinho('f-650 ',8)">F-650= R$8,00</button>
-<button onclick="adicionarCarrinho('motorhomer ',4)">motorhome= R$4,00</button>
+<!-- CARROS RAROS -->
+<div id="carros_raros" class="submenu" style="display:none;">
+
+<button onclick="adicionarCarrinho('SW4',8)">
+SW4 = R$8,00
+</button>
+
+<button onclick="adicionarCarrinho('F-650',8)">
+F-650 = R$8,00
+</button>
+
+<button onclick="adicionarCarrinho('Motorhome',4)">
+MOTORHOME = R$4,00
+</button>
+
 <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
 </div>
 
-<!-- carros premium -->
-<div id="carros premium" class="submenu" style="display:none;">
-<button onclick="adicionarCarrinho('la Ferrari',3.5)">LA FERRARI= R$3,50</button>
-<button onclick="adicionarCarrinho('jeep gladiador ',3.5)">JEEP GLADIADOR= R$3,50</button>
-<button onclick="adicionarCarrinho('m2',3.5)">M2= R$3,50</button>
-<button onclick="adicionarCarrinho('360z ',3.5)">360z= R$3,50</button>
+<!-- CARROS PREMIUM -->
+<div id="carros_premium" class="submenu" style="display:none;">
+
+<button onclick="adicionarCarrinho('La Ferrari',3.5)">
+LA FERRARI = R$3,50
+</button>
+
+<button onclick="adicionarCarrinho('Jeep Gladiador',3.5)">
+JEEP GLADIADOR = R$3,50
+</button>
+
+<button onclick="adicionarCarrinho('M2',3.5)">
+M2 = R$3,50
+</button>
+
+<button onclick="adicionarCarrinho('360z',3.5)">
+360z = R$3,50
+</button>
+
 <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
 </div>
 
-<!-- carros glitch -->
-<div id="carros glitch" class="submenu" style="display:none;">
-<button onclick="adicionarCarrinho('300hp',3.5)">300HP= R$3,50</button>
-<button onclick="adicionarCarrinho('414hp ',3.5)">414HP= R$3,50</button>
+<!-- CARROS GLITCH -->
+<div id="carros_glitch" class="submenu" style="display:none;">
+
+<button onclick="adicionarCarrinho('300HP',3.5)">
+300HP = R$3,50
+</button>
+
+<button onclick="adicionarCarrinho('414HP',3.5)">
+414HP = R$3,50
+</button>
+
 <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
 </div>
-
-
 
 <!-- FEEDBACK -->
 <div id="feedback" class="submenu" style="display:none;">
@@ -228,26 +272,31 @@ style="font-size:25px;color:gold;font-weight:bold;">
 <br>
 
 <!-- FOTO -->
-<div class="exemploFoto" onclick="abrirZoom('https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png')">
-    <img src="https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png"
-    style="width:100%;height:100%;object-fit:cover;">
+<div class="exemploFoto"
+onclick="abrirZoom('https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png')">
+
+<img src="https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png"
+style="width:100%;height:100%;object-fit:cover;">
+
 </div>
 
 <br>
 
-<!-- 👤 NOME FIXO -->
+<!-- NOME -->
 <div id="areaNome"></div>
 
 <br>
 
 <select id="notaFeedback"
 style="width:100%;padding:15px;border-radius:15px;font-size:18px;">
+
 <option value="">⭐ Escolha as estrelas</option>
 <option value="1">⭐</option>
 <option value="2">⭐⭐</option>
 <option value="3">⭐⭐⭐</option>
 <option value="4">⭐⭐⭐⭐</option>
 <option value="5">⭐⭐⭐⭐⭐</option>
+
 </select>
 
 <br><br>
@@ -258,23 +307,24 @@ style="width:100%;height:120px;border-radius:15px;padding:10px;"></textarea>
 
 <br><br>
 
-<button onclick="enviarFeedback()" style="background:green;width:100%;">
+<button onclick="enviarFeedback()"
+style="background:green;width:100%;">
 Enviar feedback
 </button>
 
 <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 
 <div id="listaFeedbacks"></div>
-</div>
 
 </div>
 
-<!-- 🔥 CARRINHO FLUTUANTE -->
+</div>
+
+<!-- CARRINHO -->
 <div id="carrinhoFlutuante" onclick="toggleCarrinho()">
 🛒 <span id="contador">0</span>
 </div>
 
-<!-- 🔥 POPUP DO CARRINHO -->
 <div id="carrinhoPopup">
 
 <h2>🛒 Seu Carrinho</h2>
@@ -295,14 +345,8 @@ Enviar feedback
 
 <!-- ZOOM -->
 <div id="zoomOverlay" onclick="fecharZoom()">
-    <img id="zoomImg">
+<img id="zoomImg">
 </div>
-
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-<script>
 
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -335,13 +379,10 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
 
-/* =========================
-   SCRIPT
-========================= */
-
+/* SCRIPT */
 let carrinho = [];
 
-/* ID ÚNICO */
+/* ID UNICO */
 let userID = localStorage.getItem("userID");
 
 if(!userID){
@@ -352,50 +393,54 @@ if(!userID){
 
 }
 
-/* NOME FIXO */
-let nomeUsuario = localStorage.getItem("nomeUsuario") || "";
+/* NOME */
+let nomeUsuario =
+localStorage.getItem("nomeUsuario") || "";
 
-/* MOSTRAR NOME FIXO */
+/* CONTROLE TROCA */
+let trocouNome =
+localStorage.getItem("trocouNome") || "false";
+
+/* LOAD */
 window.onload = function(){
 
-    let areaNome = document.getElementById("areaNome");
+    atualizarAreaNome();
 
-    if(nomeUsuario){
+    mostrarFeedbacks();
+}
 
-        areaNome.innerHTML = `
+/* AREA NOME */
+function atualizarAreaNome(){
 
-        <div style="
-        background:#111;
-        padding:15px;
-        border-radius:15px;
-        border:2px solid #00ff88;
-        text-align:left;
-        ">
+    let areaNome =
+    document.getElementById("areaNome");
 
-        <b>👤 Nome:</b><br>
-        ${nomeUsuario}
+    areaNome.innerHTML = `
 
+    <div style="
+    background:#111;
+    padding:15px;
+    border-radius:15px;
+    border:2px solid #00ff88;
+    text-align:left;
+    ">
+
+    <b>👤 Nome:</b><br>
+
+    <span id="nomeAtual">
+    ${nomeUsuario || "Não definido"}
+    </span>
+
+    <br><br>
+
+    <b>🆔 ID:</b><br>
+    ${userID.slice(0,6)}
+
+    ${
+        !nomeUsuario
+        ?
+        `
         <br><br>
-
-        <b>🆔 ID:</b><br>
-        ${userID.slice(0,6)}
-
-        </div>
-
-        `;
-
-    }else{
-
-        areaNome.innerHTML = `
-
-        <div style="
-        background:#111;
-        padding:15px;
-        border-radius:15px;
-        border:2px solid #00ff88;
-        ">
-
-        <h3>🆔 Salve seu nome único</h3>
 
         <input type="text"
         id="nomeInput"
@@ -416,13 +461,109 @@ window.onload = function(){
         ">
         Salvar Nome
         </button>
+        `
+        :
+        trocouNome == "false"
+        ?
+        `
+        <br><br>
 
-        </div>
+        <button onclick="trocarNome()"
+        style="
+        width:100%;
+        background:#ff8800;
+        ">
+        🔄 Trocar Nome
+        </button>
 
-        `;
+        <br><br>
+
+        <small style="color:#aaa;">
+        ⚠ Você só pode trocar o nome mais 1 vez
+        </small>
+        `
+        :
+        `
+        <br><br>
+
+        <small style="color:red;">
+        ❌ Limite de troca atingido
+        </small>
+        `
     }
 
-    mostrarFeedbacks();
+    </div>
+
+    `;
+}
+
+/* SALVAR NOME */
+function salvarNome(){
+
+    let nome =
+    document.getElementById("nomeInput").value;
+
+    if(nome.trim()==""){
+
+        alert("Digite um nome");
+
+        return;
+    }
+
+    localStorage.setItem(
+    "nomeUsuario",
+    nome
+    );
+
+    nomeUsuario = nome;
+
+    atualizarAreaNome();
+
+    alert("✔ Nome salvo");
+}
+
+/* TROCAR NOME */
+function trocarNome(){
+
+    let senha = prompt(
+    "Digite a senha para trocar o nome:"
+    );
+
+    if(senha !== "2010"){
+
+        alert("Senha incorreta");
+
+        return;
+    }
+
+    let novoNome = prompt(
+    "Digite o novo nome:"
+    );
+
+    if(!novoNome || novoNome.trim()==""){
+
+        alert("Nome inválido");
+
+        return;
+    }
+
+    localStorage.setItem(
+    "nomeUsuario",
+    novoNome
+    );
+
+    localStorage.setItem(
+    "trocouNome",
+    "true"
+    );
+
+    nomeUsuario = novoNome;
+
+    trocouNome = "true";
+
+    atualizarAreaNome();
+
+    alert("✔ Nome alterado com sucesso");
 }
 
 /* MENU */
@@ -437,28 +578,12 @@ function voltar(){
 
     document.querySelectorAll(".submenu")
     .forEach(m=>{
+
         m.style.display="none";
+
     });
 
     document.getElementById("main").style.display="flex";
-}
-
-/* SALVAR NOME */
-function salvarNome(){
-
-    let nome =
-    document.getElementById("nomeInput").value;
-
-    if(nome.trim()==""){
-        alert("Digite um nome");
-        return;
-    }
-
-    localStorage.setItem("nomeUsuario",nome);
-
-    nomeUsuario = nome;
-
-    location.reload();
 }
 
 /* CARRINHO */
@@ -524,20 +649,16 @@ function limparCarrinho(){
     atualizarCarrinho();
 }
 
-/* CARRINHO FLUTUANTE */
+/* TOGGLE CARRINHO */
 function toggleCarrinho(){
 
     let popup =
     document.getElementById("carrinhoPopup");
 
-    if(popup.style.display=="block"){
-
-        popup.style.display="none";
-
-    }else{
-
-        popup.style.display="block";
-    }
+    popup.style.display =
+    popup.style.display=="block"
+    ? "none"
+    : "block";
 }
 
 /* COMPRAR */
@@ -638,7 +759,7 @@ function enviarFeedback(){
     alert("✔ Feedback enviado");
 }
 
-/* MOSTRAR FEEDBACKS ONLINE */
+/* MOSTRAR FEEDBACKS */
 function mostrarFeedbacks(){
 
     let area =
@@ -713,4 +834,23 @@ function mostrarFeedbacks(){
     });
 }
 
+/* ZOOM */
+function abrirZoom(img){
+
+    document.getElementById("zoomOverlay")
+    .style.display="flex";
+
+    document.getElementById("zoomImg")
+    .src=img;
+}
+
+function fecharZoom(){
+
+    document.getElementById("zoomOverlay")
+    .style.display="none";
+}
+
 </script>
+
+</body>
+</html>
