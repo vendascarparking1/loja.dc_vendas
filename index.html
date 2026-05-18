@@ -37,13 +37,15 @@ button{
     font-size:20px;
     border:none;
     border-radius:15px;
-    background:#A020F0;
+    background:blue;
     color:white;
     cursor:pointer;
+    transition:0.2s;
 }
 
 button:hover{
     opacity:0.9;
+    transform:scale(1.02);
 }
 
 .voltar{
@@ -92,7 +94,7 @@ button:hover{
     height:250px;
     border-radius:20px;
     overflow:hidden;
-    cursor:zoom-in;
+    cursor:pointer;
 }
 
 #zoomOverlay{
@@ -114,7 +116,6 @@ button:hover{
     border-radius:15px;
 }
 
-/* CARRINHO FLUTUANTE */
 #carrinhoFlutuante{
     position:fixed;
     bottom:20px;
@@ -130,7 +131,6 @@ button:hover{
     z-index:999999;
 }
 
-/* POPUP CARRINHO */
 #carrinhoPopup{
     position:fixed;
     bottom:90px;
@@ -139,7 +139,7 @@ button:hover{
     max-height:420px;
     overflow:auto;
     background:rgba(0,0,0,0.95);
-    border:2px solid #0000FF;
+    border:2px solid #00ff88;
     border-radius:20px;
     padding:15px;
     z-index:999999;
@@ -155,144 +155,463 @@ button:hover{
     text-align:left;
 }
 
+/* SHOP */
+
+.produtosGrid{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.cardProduto{
+    background:linear-gradient(145deg,#1b1b1b,#111);
+    border:2px solid #A020F0;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 0 20px rgba(160,32,240,0.35);
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.tituloProduto{
+    font-size:24px;
+    font-weight:bold;
+    color:#00aaff;
+}
+
+.descProduto{
+    color:#ccc;
+    line-height:1.6;
+    font-size:16px;
+}
+
+.precoProduto{
+    font-size:30px;
+    font-weight:bold;
+    color:#00ff88;
+}
+
+.btnComprar{
+    background:#00aa88;
+    width:100%;
+}
+
+.tagProduto{
+    background:#ff0088;
+    width:max-content;
+    padding:6px 14px;
+    border-radius:50px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+/* MSG */
+
+#msgCarrinho{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#00ff88;
+    color:black;
+    padding:15px 25px;
+    border-radius:50px;
+    font-weight:bold;
+    z-index:9999999;
+    display:none;
+}
+
 </style>
 </head>
 
 <body>
 
+<div id="msgCarrinho"></div>
+
 <div class="container">
 
-<h1>『🛒』DC_VENDAS</h1>
+<h1>『🛒』DC_VENDAS『🛒』</h1>
 <h2>+55 62 9976-4298</h2>
 
-<!-- MENU -->
 <div id="main" class="menu">
 
 <button onclick="abrir('golds')">💰 Golds</button>
-
-<button onclick="abrir('carros_raros')">🚗 CARROS RAROS</button>
-
-<button onclick="abrir('carros_premium')">🚗 CARROS PREMIUM</button>
-
-<button onclick="abrir('carros_glitch')">🚗 CARROS GLITCH</button>
-
+<button onclick="abrir('carros-raros')">🚗 carros raros</button>
+<button onclick="abrir('carros-premium')">🚗 carros premium</button>
+<button onclick="abrir('carros-glitch')">🚗 carros glitch</button>
 <button onclick="abrir('feedback')">💬 Feedback</button>
 
 </div>
 
 <!-- GOLDS -->
+
 <div id="golds" class="submenu" style="display:none;">
 
-<button onclick="adicionarCarrinho('Qualquer quantidade de golds',6.50)">
-QUALQUER QUANTIA DE GOLDS = R$6,50
-</button>
+<div class="produtosGrid">
 
-<button onclick="adicionarCarrinho('Golds + King',10)">
-QUALQUER QUANTIA DE GOLDS + KING = R$10
+<div class="cardProduto">
+<div class="tagProduto">🔥 Popular</div>
+<div class="tituloProduto">💰 10k Golds</div>
+<div class="descProduto">Entrega rápida</div>
+<div class="precoProduto">R$1,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('10k Golds',1)">
+🛒 Adicionar ao Carrinho
 </button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 20k Golds</div>
+<div class="precoProduto">R$2,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('20k Golds',2)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 30k Golds</div>
+<div class="precoProduto">R$3,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('30k Golds',3)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 40k Golds</div>
+<div class="precoProduto">R$4,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('40k Golds',4)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 50k Golds</div>
+<div class="precoProduto">R$5,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('50k Golds',5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 100k Golds</div>
+<div class="precoProduto">R$6,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('100k Golds',6)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 250k Golds</div>
+<div class="precoProduto">R$7,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('250k Golds',7)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 500k Golds</div>
+<div class="precoProduto">R$8,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('500k Golds',8)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">👑Rank king</div>
+<div class="tagProduto">🤴REI</div>
+<div class="precoProduto">R$5,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('Rank king',5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
 
 <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 
+</div>
 </div>
 
 <!-- CARROS RAROS -->
-<div id="carros_raros" class="submenu" style="display:none;">
 
-<button onclick="adicionarCarrinho('SW4',8)">
-SW4 = R$8,00
+<div id="carros-raros" class="submenu" style="display:none;">
+
+<div class="produtosGrid">
+
+<div class="cardProduto"> 
+<div class="tituloProduto">🚚F-650</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$10,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('F-650',10)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">🚗 SW4</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$10,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('sw4',10)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">🚗 Motorhome</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$4,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('Motorhome',4)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">🚗 La Ferrari</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$6,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('La Ferrari',6)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">🚗 M2 NOVA</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$4,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('M2 NOVA',4)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<button class="voltar" onclick="voltar()">⬅ Voltar
 </button>
 
-<button onclick="adicionarCarrinho('F-650',8)">
-F-650 = R$8,00
-</button>
-
-<button onclick="adicionarCarrinho('Motorhome',4)">
-MOTORHOME = R$4,00
-</button>
-
-<button class="voltar" onclick="voltar()">⬅ Voltar</button>
-
+</div>
 </div>
 
 <!-- CARROS PREMIUM -->
-<div id="carros_premium" class="submenu" style="display:none;">
 
-<button onclick="adicionarCarrinho('La Ferrari',3.5)">
-LA FERRARI = R$3,50
+<div id="carros-premium" class="submenu" style="display:none;">
+
+<div class="produtosGrid">
+
+<div class="cardProduto"> 
+<div class="tituloProduto">JEEP GALARDIADOR</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('Jeep gladiador',3.5)">
+🛒 Adicionar ao Carrinho
 </button>
+</div>
 
-<button onclick="adicionarCarrinho('Jeep Gladiador',3.5)">
-JEEP GLADIADOR = R$3,50
+<div class="cardProduto"> 
+<div class="tituloProduto">340z</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('340z',3.5)">
+🛒 Adicionar ao Carrinho
 </button>
+</div>
 
-<button onclick="adicionarCarrinho('M2',3.5)">
-M2 = R$3,50
+<div class="cardProduto"> 
+<div class="tituloProduto">400z</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('400z',3.5)">
+🛒 Adicionar ao Carrinho
 </button>
-
-<button onclick="adicionarCarrinho('340z',3.5)">
-340z = R$3,50
-</button>
-
-<button onclick="adicionarCarrinho('400z',3.5)">
-400z = R$3,50
-    </button>
+</div>
 
 <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 
+</div>
 </div>
 
 <!-- CARROS GLITCH -->
-<div id="carros_glitch" class="submenu" style="display:none;">
 
-<button onclick="adicionarCarrinho('300HP',3.5)">
-300HP = R$3,50
-</button>
+<div id="carros-glitch" class="submenu" style="display:none;">
 
-<button onclick="adicionarCarrinho('414HP',3.5)">
-414HP = R$3,50
+<div class="produtosGrid">
+
+<div class="cardProduto"> 
+<div class="tituloProduto">300HP</div>
+<div class="tagProduto">🔥 Rápido</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('300hp',3.5)">
+🛒 Adicionar ao Carrinho
 </button>
+</div>
+
+
+<div class="cardProduto"> 
+<div class="tituloProduto">414HP</div>
+<div class="tagProduto">🔥 Rápido</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('414hp',3.5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
 
 <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 
 </div>
+</div>
+
+
+<!-- FOTO STORY / ZOOM -->
+<style>
+
+.exemploFoto{
+    width:100%;
+    max-width:320px;
+    height:570px;
+    margin:auto;
+    border-radius:25px;
+    overflow:hidden;
+    border:3px solid #A020F0;
+    cursor:pointer;
+    position:relative;
+    background:#111;
+}
+
+.exemploFoto img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.3s;
+}
+
+.exemploFoto:hover img{
+    transform:scale(1.03);
+}
+
+/* ZOOM */
+
+#zoomOverlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    padding:15px;
+    box-sizing:border-box;
+}
+
+#zoomImg{
+    max-width:100%;
+    max-height:100%;
+    border-radius:20px;
+    object-fit:contain;
+}
+
+</style>
 
 <!-- FEEDBACK -->
 <div id="feedback" class="submenu" style="display:none;">
 
-<h2>⭐ Avaliações dos clientes</h2>
+<h2>🖼 Clique na foto para ampliar em zoom.</h2>
 
-<div style="background:#111;padding:12px;border-radius:15px;">
-🛡 Cada cliente possui um sistema de 🆔 único automático.<br>
-Isso impede feedback fake mesmo mudando o nome.
-</div>
-
-<br>
-
-<div id="mediaEstrelas"
-style="font-size:25px;color:gold;font-weight:bold;">
-⭐⭐⭐⭐⭐ (5.0)
-</div>
-
-<br>
-
-<!-- FOTO -->
 <div class="exemploFoto"
 onclick="abrirZoom('https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png')">
 
 <img src="https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png"
 style="width:100%;height:100%;object-fit:cover;">
 
+
 </div>
 
 <br>
 
-<!-- NOME -->
+<!-- AREA NOME -->
+
 <div id="areaNome"></div>
 
 <br>
 
+<!-- AVISO -->
+
+<div style="
+background:#111;
+padding:15px;
+border-radius:15px;
+border:2px solid #ff8800;
+color:#fff;
+line-height:1.7;
+text-align:left;
+">
+
+<b>⚠ IMPORTANTE</b>
+
+<br><br>
+
+🆔 O ID é fixo e automático.
+
+<br>
+
+👤 O nome pode ser alterado apenas 1 vez.
+
+<br>
+
+🔒 Para trocar o nome é necessário usar a senha.
+
+</div>
+
+<br>
+
+<!-- ADICIONAR AVALIAÇÃO -->
+
+<div class="cardProduto">
+
+<div class="tituloProduto">
+⭐ Avaliações dos clientes
+</div>
+
+<div class="descProduto">
+Deixe sua opinião sobre a loja
+</div>
+
+<br>
+
 <select id="notaFeedback"
-style="width:100%;padding:15px;border-radius:15px;font-size:18px;">
+style="
+width:100%;
+padding:15px;
+border-radius:15px;
+font-size:18px;
+border:none;
+outline:none;
+">
 
 <option value="">⭐ Escolha as estrelas</option>
 <option value="1">⭐</option>
@@ -306,17 +625,52 @@ style="width:100%;padding:15px;border-radius:15px;font-size:18px;">
 <br><br>
 
 <textarea id="textoFeedback"
-placeholder="Só clientes que compraram podem avaliar..."
-style="width:100%;height:120px;border-radius:15px;padding:10px;"></textarea>
+placeholder="Digite sua avaliação..."
+style="
+width:100%;
+height:120px;
+border-radius:15px;
+padding:12px;
+font-size:16px;
+border:none;
+outline:none;
+resize:none;
+box-sizing:border-box;
+"></textarea>
 
 <br><br>
 
 <button onclick="enviarFeedback()"
-style="background:green;width:100%;">
-Enviar feedback
+style="
+background:#00aa88;
+width:100%;
+">
+🛒 Enviar Avaliação
 </button>
 
-<button class="voltar" onclick="voltar()">⬅ Voltar</button>
+</div>
+
+<br>
+
+<!-- LISTA -->
+
+<div class="cardProduto">
+
+<div class="tituloProduto">
+💬 Avaliações
+</div>
+
+<div id="mediaEstrelas"
+style="
+font-size:25px;
+color:gold;
+font-weight:bold;
+margin-top:10px;
+">
+⭐⭐⭐⭐⭐ (5.0)
+</div>
+
+<br>
 
 <div id="listaFeedbacks"></div>
 
@@ -354,10 +708,23 @@ Enviar feedback
 
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script>
+
+/* EMAILJS */
+window.addEventListener("load", function(){
+
+    if(window.emailjs){
+
+        emailjs.init("UqrpcgQiX9oJoh6K2");
+
+    }
+
+});
 
 const firebaseConfig = {
 
@@ -379,14 +746,15 @@ const firebaseConfig = {
 
 };
 
+
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
 
-/* SCRIPT */
+/* CARRINHO */
 let carrinho = [];
 
-/* ID UNICO */
+/* ID */
 let userID = localStorage.getItem("userID");
 
 if(!userID){
@@ -394,23 +762,42 @@ if(!userID){
     userID = crypto.randomUUID();
 
     localStorage.setItem("userID",userID);
-
 }
 
 /* NOME */
 let nomeUsuario =
 localStorage.getItem("nomeUsuario") || "";
 
-/* CONTROLE TROCA */
-let trocouNome =
-localStorage.getItem("trocouNome") || "false";
+/* TROCAS */
+let trocasNome =
+parseInt(localStorage.getItem("trocasNome")) || 0;
 
 /* LOAD */
-window.onload = function(){
+document.addEventListener("DOMContentLoaded", function(){
 
     atualizarAreaNome();
 
     mostrarFeedbacks();
+
+});
+
+/* MSG ITEM */
+function mostrarMensagem(texto){
+
+    let msg =
+    document.getElementById("msgCarrinho");
+
+    if(!msg) return;
+
+    msg.innerHTML = texto;
+
+    msg.style.display = "block";
+
+    setTimeout(()=>{
+
+        msg.style.display = "none";
+
+    },2000);
 }
 
 /* AREA NOME */
@@ -440,12 +827,17 @@ function atualizarAreaNome(){
     <b>🆔 ID:</b><br>
     ${userID.slice(0,6)}
 
+    <br><br>
+
+    <b>🔄 Troca restante:</b>
+    ${1 - trocasNome}
+
+    <br><br>
+
     ${
         !nomeUsuario
         ?
         `
-        <br><br>
-
         <input type="text"
         id="nomeInput"
         placeholder="Digite seu nome"
@@ -463,15 +855,13 @@ function atualizarAreaNome(){
         width:100%;
         background:#00aa88;
         ">
-        Salvar Nome
+        ✔ Salvar Nome
         </button>
         `
         :
-        trocouNome == "false"
+        trocasNome < 1
         ?
         `
-        <br><br>
-
         <button onclick="trocarNome()"
         style="
         width:100%;
@@ -479,22 +869,27 @@ function atualizarAreaNome(){
         ">
         🔄 Trocar Nome
         </button>
-
-        <br><br>
-
-        <small style="color:#aaa;">
-        ⚠ Você só pode trocar o nome mais 1 vez
-        </small>
         `
         :
         `
-        <br><br>
-
-        <small style="color:red;">
+        <div style="
+        color:red;
+        font-weight:bold;
+        ">
         ❌ Limite de troca atingido
-        </small>
+        </div>
         `
     }
+
+    <br><br>
+
+    <button class="voltar"
+    onclick="voltar()"
+    style="
+    width:100%;
+    ">
+    ⬅ Voltar
+    </button>
 
     </div>
 
@@ -510,33 +905,34 @@ function salvarNome(){
     if(nome.trim()==""){
 
         alert("Digite um nome");
-
         return;
     }
 
-    localStorage.setItem(
-    "nomeUsuario",
-    nome
-    );
+    localStorage.setItem("nomeUsuario",nome);
 
     nomeUsuario = nome;
 
     atualizarAreaNome();
 
-    alert("✔ Nome salvo");
+    mostrarMensagem("✔ Nome salvo");
 }
 
 /* TROCAR NOME */
 function trocarNome(){
 
+    if(trocasNome >= 1){
+
+        alert("Limite atingido");
+        return;
+    }
+
     let senha = prompt(
-    "Digite a senha para trocar o nome:"
+    "Digite a senha:"
     );
 
     if(senha !== "2010"){
 
         alert("Senha incorreta");
-
         return;
     }
 
@@ -547,9 +943,12 @@ function trocarNome(){
     if(!novoNome || novoNome.trim()==""){
 
         alert("Nome inválido");
-
         return;
     }
+
+    nomeUsuario = novoNome;
+
+    trocasNome++;
 
     localStorage.setItem(
     "nomeUsuario",
@@ -557,17 +956,13 @@ function trocarNome(){
     );
 
     localStorage.setItem(
-    "trocouNome",
-    "true"
+    "trocasNome",
+    trocasNome
     );
-
-    nomeUsuario = novoNome;
-
-    trocouNome = "true";
 
     atualizarAreaNome();
 
-    alert("✔ Nome alterado com sucesso");
+    mostrarMensagem("✔ Nome alterado");
 }
 
 /* MENU */
@@ -584,7 +979,6 @@ function voltar(){
     .forEach(m=>{
 
         m.style.display="none";
-
     });
 
     document.getElementById("main").style.display="flex";
@@ -596,6 +990,8 @@ function adicionarCarrinho(nome,valor){
     carrinho.push({nome,valor});
 
     atualizarCarrinho();
+
+    mostrarMensagem("🛒 "+nome+" adicionado ao carrinho");
 }
 
 function atualizarCarrinho(){
@@ -641,6 +1037,8 @@ function atualizarCarrinho(){
 
 function removerItem(index){
 
+    mostrarMensagem("❌ Item removido");
+
     carrinho.splice(index,1);
 
     atualizarCarrinho();
@@ -651,9 +1049,10 @@ function limparCarrinho(){
     carrinho=[];
 
     atualizarCarrinho();
+
+    mostrarMensagem("🗑 Carrinho limpo");
 }
 
-/* TOGGLE CARRINHO */
 function toggleCarrinho(){
 
     let popup =
@@ -671,28 +1070,27 @@ function comprarTudo(){
     if(carrinho.length==0){
 
         alert("Carrinho vazio");
-
         return;
     }
 
     let numero="556299764298";
 
     let msg =
-    "Olá quero comprar:%0A%0A";
+    "🛒 Olá quero comprar:%0A%0A";
 
     let soma=0;
 
     carrinho.forEach(i=>{
 
         msg +=
-        "- "+i.nome+
-        " R$"+i.valor+
+        "• "+i.nome+
+        " - R$"+i.valor+
         "%0A";
 
         soma += i.valor;
     });
 
-    msg += "%0ATotal: R$"+soma;
+    msg += "%0A💰 Total: R$"+soma;
 
     window.open(
     "https://wa.me/"+numero+"?text="+msg
@@ -704,7 +1102,7 @@ function comprarTudo(){
     );
 }
 
-/* ENVIAR FEEDBACK */
+/* FEEDBACK */
 function enviarFeedback(){
 
     let podeAvaliar =
@@ -713,14 +1111,12 @@ function enviarFeedback(){
     if(!nomeUsuario){
 
         alert("Salve seu nome primeiro");
-
         return;
     }
 
     if(!podeAvaliar){
 
         alert("Compre algo primeiro");
-
         return;
     }
 
@@ -733,14 +1129,12 @@ function enviarFeedback(){
     if(estrelas==""){
 
         alert("Escolha as estrelas");
-
         return;
     }
 
     if(texto.trim()==""){
 
         alert("Digite algo");
-
         return;
     }
 
@@ -754,10 +1148,23 @@ function enviarFeedback(){
 
     });
 
+    if(window.emailjs){
+
+        emailjs.send(
+        "service_5wf3vf2",
+        "template_0qp2ixo",
+        {
+            nome: nomeUsuario,
+            estrelas: estrelas,
+            mensagem: texto,
+            id: userID.slice(0,6)
+        });
+
+    }
+
     localStorage.removeItem("podeAvaliar");
 
     document.getElementById("textoFeedback").value="";
-
     document.getElementById("notaFeedback").value="";
 
     alert("✔ Feedback enviado");
@@ -798,30 +1205,47 @@ function mostrarFeedbacks(){
 
             area.innerHTML += `
 
-            <div>
+            <div style="
+            background:#1b1b1b;
+            border-radius:20px;
+            padding:15px;
+            margin-top:15px;
+            border:2px solid #A020F0;
+            ">
 
-            <b>${f.nome}</b>
+            <b style="font-size:18px;">
+            👤 ${f.nome}
+            </b>
 
             <br>
 
+            <small style="color:#00ff88;">
             🆔 ${f.id.slice(0,6)}
+            </small>
 
             <br><br>
 
             <span style="
             color:gold;
-            font-size:20px;
+            font-size:22px;
             ">
             ${estrelas}
             </span>
 
             <br><br>
 
+            <div style="
+            color:#ddd;
+            line-height:1.5;
+            ">
             ${f.texto}
+            </div>
 
-            <br><br>
+            <br>
 
-            <small>${f.data}</small>
+            <small style="color:#999;">
+            ${f.data}
+            </small>
 
             </div>
 
