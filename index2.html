@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loja VIP</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:url('https://i.ibb.co/VcxSk0HZ/file-000000001fac720eaabdb3954d001059.png') no-repeat center center fixed;
+    background-size:cover;
+    color:white;
+    text-align:center;
+}
+
+.container{
+    background:rgba(0,0,0,0.7);
+    min-height:100vh;
+    padding:20px;
+}
+
+h1,h2,h3{
+    color:red;
+}
+
+.menu,.submenu{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+button{
+    padding:20px;
+    font-size:20px;
+    border:none;
+    border-radius:15px;
+    background:blue;
+    color:white;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    opacity:0.9;
+    transform:scale(1.02);
+}
+
+.voltar{
+    background:red;
+}
+
+.itemCarrinho{
+    background:#222;
+    padding:12px;
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px;
+}
+
+#totalCarrinho{
+    margin-top:15px;
+    font-size:25px;
+    color:#00ff88;
+}
+
+.comprarTudo{
+    background:green;
+    width:100%;
+    margin-top:15px;
+}
+
+.limparCarrinho{
+    background:red;
+    width:100%;
+    margin-top:10px;
+}
+
+.removerBtn{
+    background:red;
+    border:none;
+    color:white;
+    padding:5px 10px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.exemploFoto{
+    width:100%;
+    height:250px;
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+#zoomOverlay{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+#zoomOverlay img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:15px;
+}
+
+#carrinhoFlutuante{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#00ff88;
+    color:black;
+    padding:15px 18px;
+    border-radius:50px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(0,255,136,0.5);
+    z-index:999999;
+}
+
+#carrinhoPopup{
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    width:320px;
+    max-height:420px;
+    overflow:auto;
+    background:rgba(0,0,0,0.95);
+    border:2px solid #00ff88;
+    border-radius:20px;
+    padding:15px;
+    z-index:999999;
+    display:none;
+    box-shadow:0 0 20px rgba(0,255,136,0.4);
+}
+
+#listaFeedbacks div{
+    background:#222;
+    padding:10px;
+    margin-top:10px;
+    border-radius:10px;
+    text-align:left;
+}
+
+/* SHOP */
+
+.produtosGrid{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.cardProduto{
+    background:linear-gradient(145deg,#1b1b1b,#111);
+    border:2px solid #A020F0;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 0 20px rgba(160,32,240,0.35);
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.tituloProduto{
+    font-size:24px;
+    font-weight:bold;
+    color:#00aaff;
+}
+
+.descProduto{
+    color:#ccc;
+    line-height:1.6;
+    font-size:16px;
+}
+
+.precoProduto{
+    font-size:30px;
+    font-weight:bold;
+    color:#00ff88;
+}
+
+.btnComprar{
+    background:#00aa88;
+    width:100%;
+}
+
+.tagProduto{
+    background:#ff0088;
+    width:max-content;
+    padding:6px 14px;
+    border-radius:50px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+/* MSG */
+
+#msgCarrinho{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#00ff88;
+    color:black;
+    padding:15px 25px;
+    border-radius:50px;
+    font-weight:bold;
+    z-index:9999999;
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="msgCarrinho"></div>
+
+<div class="container">
+
+<h1>『🛒』DC_VENDAS『🛒』</h1>
+<h2>+55 62 9976-4298</h2>
+
+<div id="main" class="menu">
+
+<button onclick="abrir('golds')">💰 Golds</button>
+<button onclick="abrir('carros-raros')">🚗 carros raros</button>
+<button onclick="abrir('carros-premium')">🚗 carros premium</button>
+<button onclick="abrir('carros-glitch')">🚗 carros glitch</button>
+<button onclick="abrir('feedback')">💬 Feedback</button>
+
+</div>
+
+<!-- GOLDS -->
+
+<div id="golds" class="submenu" style="display:none;">
+
+<div class="produtosGrid">
+
+<div class="cardProduto">
+<div class="tagProduto">🔥 Popular</div>
+<div class="tituloProduto">💰 10k Golds</div>
+<div class="descProduto">Entrega rápida</div>
+<div class="precoProduto">R$1,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('10k Golds',1)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 20k Golds</div>
+<div class="precoProduto">R$2,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('20k Golds',2)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 30k Golds</div>
+<div class="precoProduto">R$3,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('30k Golds',3)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 40k Golds</div>
+<div class="precoProduto">R$4,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('40k Golds',4)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 50k Golds</div>
+<div class="precoProduto">R$5,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('50k Golds',5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 100k Golds</div>
+<div class="precoProduto">R$6,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('100k Golds',6)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 250k Golds</div>
+<div class="precoProduto">R$7,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('250k Golds',7)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">💰 500k Golds</div>
+<div class="precoProduto">R$8,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('500k Golds',8)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">👑Rank king</div>
+<div class="tagProduto">🤴REI</div>
+<div class="precoProduto">R$5,00</div>
+<button class="btnComprar"
+onclick="adicionarCarrinho('Rank king',5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+
+<button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
+</div>
+</div>
+
+<!-- CARROS RAROS -->
+
+<div id="carros-raros" class="submenu" style="display:none;">
+
+<div class="produtosGrid">
+
+<div class="cardProduto"> 
+<div class="tituloProduto">🚚F-650</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$10,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('F-650',10)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">🚗 SW4</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$10,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('sw4',10)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">🚗 Motorhome</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$4,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('Motorhome',4)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">🚗 La Ferrari</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$6,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('La Ferrari',6)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto">
+<div class="tituloProduto">🚗 M2 NOVA</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$4,00</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('M2 NOVA',4)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<button class="voltar" onclick="voltar()">⬅ Voltar
+</button>
+
+</div>
+</div>
+
+<!-- CARROS PREMIUM -->
+
+<div id="carros-premium" class="submenu" style="display:none;">
+
+<div class="produtosGrid">
+
+<div class="cardProduto"> 
+<div class="tituloProduto">JEEP GALARDIADOR</div>
+<div class="tagProduto">🔥 Raro</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('Jeep gladiador',3.5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto"> 
+<div class="tituloProduto">340z</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('340z',3.5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<div class="cardProduto"> 
+<div class="tituloProduto">400z</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('400z',3.5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
+</div>
+</div>
+
+<!-- CARROS GLITCH -->
+
+<div id="carros-glitch" class="submenu" style="display:none;">
+
+<div class="produtosGrid">
+
+<div class="cardProduto"> 
+<div class="tituloProduto">300HP</div>
+<div class="tagProduto">🔥 Rápido</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('300hp',3.5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+
+<div class="cardProduto"> 
+<div class="tituloProduto">414HP</div>
+<div class="tagProduto">🔥 Rápido</div>
+<div class="precoProduto">R$3,50</div>
+
+<button class="btnComprar"
+onclick="adicionarCarrinho('414hp',3.5)">
+🛒 Adicionar ao Carrinho
+</button>
+</div>
+
+<button class="voltar" onclick="voltar()">⬅ Voltar</button>
+
+</div>
+</div>
+
+
+<!-- FOTO STORY / ZOOM -->
+<style>
+
+.exemploFoto{
+    width:100%;
+    max-width:320px;
+    height:570px;
+    margin:auto;
+    border-radius:25px;
+    overflow:hidden;
+    border:3px solid #A020F0;
+    cursor:pointer;
+    position:relative;
+    background:#111;
+}
+
+.exemploFoto img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.3s;
+}
+
+.exemploFoto:hover img{
+    transform:scale(1.03);
+}
+
+/* ZOOM */
+
+#zoomOverlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    padding:15px;
+    box-sizing:border-box;
+}
+
+#zoomImg{
+    max-width:100%;
+    max-height:100%;
+    border-radius:20px;
+    object-fit:contain;
+}
+
+</style>
+
+<!-- FEEDBACK -->
+<div id="feedback" class="submenu" style="display:none;">
+
+<h2>🖼 Clique na foto para ampliar em zoom.</h2>
+
+<div class="exemploFoto"
+onclick="abrirZoom('https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png')">
+
+<img src="https://i.ibb.co/sdGD1DLv/file-00000000d874720ebb43f4a15f714b59.png"
+style="width:100%;height:100%;object-fit:cover;">
+
+</div>
+
+<br>
+
+<!-- AREA NOME -->
+<div id="areaNome"></div>
+
+<br>
+
+<!-- AVISO -->
+<div style="
+background:#111;
+padding:15px;
+border-radius:15px;
+border:2px solid #ff8800;
+color:#fff;
+line-height:1.7;
+text-align:left;
+">
+
+<b>⚠ IMPORTANTE</b>
+
+<br><br>
+
+🆔 O ID é fixo e automático.
+
+<br>
+
+👤 O nome pode ser alterado apenas 1 vez.
+
+<br>
+
+🔒 Para trocar o nome é necessário usar a senha.
+
+</div>
+
+<br>
+
+<!-- ADICIONAR AVALIAÇÃO -->
+<div class="cardProduto">
+
+<div class="tituloProduto">
+⭐ Avaliações dos clientes
+</div>
+
+<div class="descProduto">
+Deixe sua opinião sobre a loja
+</div>
+
+<br>
+
+<select id="notaFeedback"
+style="
+width:100%;
+padding:15px;
+border-radius:15px;
+font-size:18px;
+border:none;
+outline:none;
+">
+
+<option value="">⭐ Escolha as estrelas</option>
+<option value="1">⭐</option>
+<option value="2">⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="5">⭐⭐⭐⭐⭐</option>
+
+</select>
+
+<br><br>
+
+<textarea id="textoFeedback"
+placeholder="Digite sua avaliação..."
+style="
+width:100%;
+height:120px;
+border-radius:15px;
+padding:12px;
+font-size:16px;
+border:none;
+outline:none;
+resize:none;
+box-sizing:border-box;
+"></textarea>
+
+<br><br>
+
+<button onclick="enviarFeedback()"
+style="
+background:#00aa88;
+width:100%;
+">
+🛒 Enviar Avaliação
+</button>
+
+</div>
+
+<br>
+
+<!-- LISTA -->
+<div class="cardProduto">
+
+<div class="tituloProduto">
+💬 Avaliações
+</div>
+
+<div id="mediaEstrelas"
+style="
+font-size:25px;
+color:gold;
+font-weight:bold;
+margin-top:10px;
+">
+⭐⭐⭐⭐⭐ (5.0)
+</div>
+
+<br>
+
+<div id="listaFeedbacks"></div>
+
+</div>
+
+</div>
+
+<!-- CARRINHO -->
+<div id="carrinhoFlutuante" onclick="toggleCarrinho()">
+🛒 <span id="contador">0</span>
+</div>
+
+<div id="carrinhoPopup">
+
+<h2>🛒 Seu Carrinho</h2>
+
+<div id="listaCarrinho"></div>
+
+<div id="totalCarrinho">Total: R$0</div>
+
+<button class="comprarTudo" onclick="comprarTudo()">
+✅ Comprar Tudo
+</button>
+
+<button class="limparCarrinho" onclick="limparCarrinho()">
+🗑 Limpar Carrinho
+</button>
+
+</div>
+
+<!-- ZOOM -->
+<div id="zoomOverlay" onclick="fecharZoom()">
+<img id="zoomImg">
+</div>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+
+/* EMAILJS */
+window.addEventListener("load", function(){
+
+    if(window.emailjs){
+
+        emailjs.init({
+            publicKey:"UqrpcgQiX9oJoh6K2"
+        });
+
+    }
+
+});
+
+/* FIREBASE */
+const firebaseConfig = {
+
+  apiKey: "AIzaSyDiUxNnUpNOLfr42s9vhQLApuntCI5k41Q",
+
+  authDomain: "dcvendas.firebaseapp.com",
+
+  databaseURL: "https://dcvendas-default-rtdb.firebaseio.com",
+
+  projectId: "dcvendas",
+
+  storageBucket: "dcvendas.appspot.com",
+
+  messagingSenderId: "703988302793",
+
+  appId: "1:703988302793:web:11b4530ca2db8d621ade18"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+/* CARRINHO */
+let carrinho = [];
+
+/* ID */
+let userID = localStorage.getItem("userID");
+
+if(!userID){
+
+    userID =
+    Math.random().toString(36)
+    .substring(2,10);
+
+    localStorage.setItem(
+    "userID",
+    userID
+    );
+}
+
+/* NOME */
+let nomeUsuario =
+localStorage.getItem("nomeUsuario") || "";
+
+/* TROCAS */
+let trocasNome =
+parseInt(
+localStorage.getItem("trocasNome")
+) || 0;
+
+/* LOAD */
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+    atualizarAreaNome();
+
+    mostrarFeedbacks();
+
+});
+
+/* MSG ITEM */
+function mostrarMensagem(texto){
+
+    let msg =
+    document.getElementById(
+    "msgCarrinho"
+    );
+
+    if(!msg) return;
+
+    msg.innerHTML = texto;
+
+    msg.style.display = "block";
+
+    setTimeout(()=>{
+
+        msg.style.display = "none";
+
+    },2000);
+}
+
+/* AREA NOME */
+function atualizarAreaNome(){
+
+    let areaNome =
+    document.getElementById(
+    "areaNome"
+    );
+
+    areaNome.innerHTML = `
+
+    <div style="
+    background:#111;
+    padding:15px;
+    border-radius:15px;
+    border:2px solid #00ff88;
+    text-align:left;
+    ">
+
+    <b>👤 Nome:</b><br>
+
+    <span id="nomeAtual">
+    ${nomeUsuario || "Não definido"}
+    </span>
+
+    <br><br>
+
+    <b>🆔 ID:</b><br>
+    ${userID.slice(0,6)}
+
+    <br><br>
+
+    <b>🔄 Troca restante:</b>
+    ${1 - trocasNome}
+
+    <br><br>
+
+    ${
+        !nomeUsuario
+        ?
+        `
+        <input type="text"
+        id="nomeInput"
+        placeholder="Digite seu nome"
+        style="
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:12px;
+        ">
+
+        <br><br>
+
+        <button onclick="salvarNome()"
+        style="
+        width:100%;
+        background:#00aa88;
+        ">
+        ✔ Salvar Nome
+        </button>
+        `
+        :
+        trocasNome < 1
+        ?
+        `
+        <button onclick="trocarNome()"
+        style="
+        width:100%;
+        background:#ff8800;
+        ">
+        🔄 Trocar Nome
+        </button>
+        `
+        :
+        `
+        <div style="
+        color:red;
+        font-weight:bold;
+        ">
+        ❌ Limite de troca atingido
+        </div>
+        `
+    }
+
+    <br><br>
+
+    <button class="voltar"
+    onclick="voltar()"
+    style="
+    width:100%;
+    ">
+    ⬅ Voltar
+    </button>
+
+    </div>
+
+    `;
+}
+
+/* SALVAR NOME */
+function salvarNome(){
+
+    let nome =
+    document.getElementById(
+    "nomeInput"
+    ).value;
+
+    if(nome.trim()==""){
+
+        alert("Digite um nome");
+        return;
+    }
+
+    localStorage.setItem(
+    "nomeUsuario",
+    nome
+    );
+
+    nomeUsuario = nome;
+
+    atualizarAreaNome();
+
+    mostrarMensagem(
+    "✔ Nome salvo"
+    );
+}
+
+/* TROCAR NOME */
+function trocarNome(){
+
+    if(trocasNome >= 1){
+
+        alert("Limite atingido");
+        return;
+    }
+
+    let senha =
+    prompt("Digite a senha:");
+
+    if(senha !== "2010"){
+
+        alert("Senha incorreta");
+        return;
+    }
+
+    let novoNome =
+    prompt("Digite o novo nome:");
+
+    if(!novoNome ||
+    novoNome.trim()==""){
+
+        alert("Nome inválido");
+        return;
+    }
+
+    nomeUsuario = novoNome;
+
+    trocasNome++;
+
+    localStorage.setItem(
+    "nomeUsuario",
+    novoNome
+    );
+
+    localStorage.setItem(
+    "trocasNome",
+    trocasNome
+    );
+
+    atualizarAreaNome();
+
+    mostrarMensagem(
+    "✔ Nome alterado"
+    );
+}
+
+/* MENU */
+function abrir(menu){
+
+    document.getElementById(
+    "main"
+    ).style.display="none";
+
+    document.getElementById(
+    menu
+    ).style.display="flex";
+}
+
+function voltar(){
+
+    document
+    .querySelectorAll(".submenu")
+    .forEach(m=>{
+
+        m.style.display="none";
+
+    });
+
+    document.getElementById(
+    "main"
+    ).style.display="flex";
+}
+
+/* CARRINHO */
+function adicionarCarrinho(nome,valor){
+
+    carrinho.push({
+        nome,
+        valor
+    });
+
+    atualizarCarrinho();
+
+    mostrarMensagem(
+    "🛒 "+nome+
+    " adicionado ao carrinho"
+    );
+}
+
+function atualizarCarrinho(){
+
+    let lista =
+    document.getElementById(
+    "listaCarrinho"
+    );
+
+    let total =
+    document.getElementById(
+    "totalCarrinho"
+    );
+
+    lista.innerHTML="";
+
+    let soma=0;
+
+    carrinho.forEach(
+    (item,index)=>{
+
+        soma += item.valor;
+
+        lista.innerHTML += `
+
+        <div class="itemCarrinho">
+
+        <span>
+        ${item.nome}
+        - R$${item.valor}
+        </span>
+
+        <button class="removerBtn"
+        onclick="removerItem(${index})">
+        ❌
+        </button>
+
+        </div>
+
+        `;
+    });
+
+    total.innerHTML =
+    "Total: R$"+
+    soma.toFixed(2);
+
+    document.getElementById(
+    "contador"
+    ).innerText =
+    carrinho.length;
+}
+
+function removerItem(index){
+
+    carrinho.splice(index,1);
+
+    atualizarCarrinho();
+
+    mostrarMensagem(
+    "❌ Item removido"
+    );
+}
+
+function limparCarrinho(){
+
+    carrinho=[];
+
+    atualizarCarrinho();
+
+    mostrarMensagem(
+    "🗑 Carrinho limpo"
+    );
+}
+
+function toggleCarrinho(){
+
+    let popup =
+    document.getElementById(
+    "carrinhoPopup"
+    );
+
+    popup.style.display =
+    popup.style.display=="block"
+    ? "none"
+    : "block";
+}
+
+/* COMPRAR */
+function comprarTudo(){
+
+    if(carrinho.length==0){
+
+        alert("Carrinho vazio");
+        return;
+    }
+
+    let numero =
+    "556299764298";
+
+    let msg =
+    "🛒 Olá quero comprar:%0A%0A";
+
+    let soma=0;
+
+    carrinho.forEach(i=>{
+
+        msg +=
+        "• "+i.nome+
+        " - R$"+i.valor+
+        "%0A";
+
+        soma += i.valor;
+    });
+
+    msg +=
+    "%0A💰 Total: R$"+
+    soma.toFixed(2);
+
+    window.open(
+    "https://wa.me/"+
+    numero+
+    "?text="+msg,
+    "_blank"
+    );
+
+    localStorage.setItem(
+    "podeAvaliar",
+    "true"
+    );
+}
+
+/* ENVIAR FEEDBACK */
+function enviarFeedback(){
+
+    let podeAvaliar =
+    localStorage.getItem(
+    "podeAvaliar"
+    );
+
+    if(!nomeUsuario){
+
+        alert(
+        "Salve seu nome primeiro"
+        );
+        return;
+    }
+
+    if(!podeAvaliar){
+
+        alert(
+        "Compre algo primeiro"
+        );
+        return;
+    }
+
+    let texto =
+    document.getElementById(
+    "textoFeedback"
+    ).value;
+
+    let estrelas =
+    document.getElementById(
+    "notaFeedback"
+    ).value;
+
+    if(estrelas==""){
+
+        alert(
+        "Escolha as estrelas"
+        );
+        return;
+    }
+
+    if(texto.trim()==""){
+
+        alert("Digite algo");
+        return;
+    }
+
+    db.ref("feedbacks").push({
+
+        nome:nomeUsuario,
+
+        id:userID,
+
+        texto:texto,
+
+        estrelas:
+        parseInt(estrelas),
+
+        data:new Date()
+        .toLocaleString()
+
+    });
+
+    if(window.emailjs){
+
+        emailjs.send(
+        "service_5wf3vf2",
+        "template_0qp2ixo",
+        {
+            nome:nomeUsuario,
+            estrelas:estrelas,
+            mensagem:texto,
+            id:userID.slice(0,6)
+        }
+        );
+
+    }
+
+    localStorage.removeItem(
+    "podeAvaliar"
+    );
+
+    document.getElementById(
+    "textoFeedback"
+    ).value="";
+
+    document.getElementById(
+    "notaFeedback"
+    ).value="";
+
+    alert(
+    "✔ Feedback enviado"
+    );
+}
+
+/* MOSTRAR FEEDBACKS */
+function mostrarFeedbacks(){
+
+    let area =
+    document.getElementById(
+    "listaFeedbacks"
+    );
+
+    db.ref("feedbacks")
+    .on("value",(snapshot)=>{
+
+        area.innerHTML="";
+
+        let dados =
+        snapshot.val();
+
+        if(!dados){
+
+            document
+            .getElementById(
+            "mediaEstrelas"
+            )
+            .innerHTML =
+            "⭐⭐⭐⭐⭐ (5.0)";
+
+            return;
+        }
+
+        let lista =
+        Object.values(dados)
+        .reverse();
+
+        let soma=0;
+
+        lista.forEach(f=>{
+
+            soma += f.estrelas;
+
+            let estrelas =
+            "⭐".repeat(
+            f.estrelas
+            );
+
+            area.innerHTML += `
+
+            <div style="
+            background:#1b1b1b;
+            border-radius:20px;
+            padding:15px;
+            margin-top:15px;
+            border:2px solid #A020F0;
+            ">
+
+            <b style="font-size:18px;">
+            👤 ${f.nome}
+            </b>
+
+            <br>
+
+            <small style="
+            color:#00ff88;
+            ">
+            🆔 ${f.id.slice(0,6)}
+            </small>
+
+            <br><br>
+
+            <span style="
+            color:gold;
+            font-size:22px;
+            ">
+            ${estrelas}
+            </span>
+
+            <br><br>
+
+            <div style="
+            color:#ddd;
+            line-height:1.5;
+            ">
+            ${f.texto}
+            </div>
+
+            <br>
+
+            <small style="
+            color:#999;
+            ">
+            ${f.data}
+            </small>
+
+            </div>
+
+            `;
+        });
+
+        let media =
+        (
+        soma/lista.length
+        ).toFixed(1);
+
+        document
+        .getElementById(
+        "mediaEstrelas"
+        )
+        .innerHTML =
+        "⭐ Média: "+
+        media+"/5";
+
+    });
+}
+
+/* ZOOM */
+function abrirZoom(img){
+
+    document.getElementById(
+    "zoomOverlay"
+    ).style.display="flex";
+
+    document.getElementById(
+    "zoomImg"
+    ).src=img;
+}
+
+function fecharZoom(){
+
+    document.getElementById(
+    "zoomOverlay"
+    ).style.display="none";
+}
+
+</script>
+
+</body>
+</html>
