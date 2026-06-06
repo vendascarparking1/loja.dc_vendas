@@ -1962,7 +1962,6 @@ mensagem,
 baixarEstoque();
 
 }
-
 // ================= ESTOQUE =================
 
 function baixarEstoque(){
@@ -1971,55 +1970,46 @@ db.ref("produtos")
 .once("value")
 .then(snapshot=>{
 
-const dados =
-snapshot.val();
+const dados = snapshot.val();
 
-if(!dados)
-return;
+if(!dados) return;
+
+const promessas = [];
 
 carrinho.forEach(item=>{
 
-Object.keys(dados)
-.forEach(categoria=>{
+Object.keys(dados).forEach(categoria=>{
 
-Object.keys(
-dados[categoria]
-)
-.forEach(id=>{
+Object.keys(dados[categoria]).forEach(id=>{
 
 const produto =
 dados[categoria][id];
 
-if(
-produto.nome ===
-item.nome
-){
+if(produto.nome === item.nome){
+
+const quantidade =
+carrinho.filter(
+p => p.nome === item.nome
+).length;
 
 let novoEstoque =
+Number(produto.estoque || 0) - quantidade;
 
-Number(
-produto.estoque
-) - 1;
-
-if(
-novoEstoque < 0
-){
+if(novoEstoque < 0){
 novoEstoque = 0;
 }
 
-db.ref(
+promessas.push(
 
+db.ref(
 "produtos/" +
 categoria +
 "/" +
-id
+id +
+"/estoque"
+).set(novoEstoque)
 
-).update({
-
-estoque:
-novoEstoque
-
-});
+);
 
 }
 
@@ -2029,7 +2019,8 @@ novoEstoque
 
 });
 
-});
+Promise.all(promessas)
+.then(()=>{
 
 carrinho = [];
 
@@ -2039,8 +2030,13 @@ mostrarMensagem(
 "✅ Pedido enviado"
 );
 
-}
+carregarProdutos();
 
+});
+
+});
+
+}
 // ================= CRIAR PRODUTO =================
 
 function criarProduto(){
